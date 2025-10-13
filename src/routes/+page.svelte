@@ -11,5 +11,4 @@
 <ol>
 	<li><a href={resolve('/examples')}>Examples</a></li>
 	<li><a href={resolve('/editor')}>Editor for custom games</a></li>
-	<li><a href={resolve('/custom-games')}>Custom Games</a></li>
 </ol>
