@@ -36,6 +36,7 @@ jobs:
       - name: Build 🛠
         run: |
           pnpm run build
+          touch build/.nojekyll
 
       - uses: actions/configure-pages@v4
 
