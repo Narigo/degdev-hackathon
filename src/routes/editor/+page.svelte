@@ -4,22 +4,29 @@
 	let lastResult = $state<{ success: boolean; message: string } | undefined>();
 </script>
 
-<section
-	class="grid min-h-svh max-w-2xl min-w-full grid-rows-[max-content_1fr_max-content_max-content] gap-4 p-4"
->
-	<form action="#">
+<section>
+	<form
+		action="#"
+		class="grid min-h-svh max-w-2xl min-w-full grid-rows-[max-content_1fr_max-content_max-content] gap-4 p-4"
+	>
 		<h2>Validation</h2>
-		<textarea class="p4 justify-self-stretch border" bind:this={textAreaElement}></textarea>
+		<textarea class="p4 justify-self-stretch border font-mono" bind:this={textAreaElement}
+		></textarea>
 		<button
 			onclick={(event) => {
 				event.preventDefault();
 				console.log(textAreaElement.value);
-				const result = gameDefinitionSchema.safeParse(textAreaElement.value);
+				try {
+					const json = JSON.parse(textAreaElement.value);
+					const result = gameDefinitionSchema.safeParse(json);
 
-				if (result.success) {
-					lastResult = { success: true, message: 'success!' };
-				} else {
-					lastResult = { success: false, message: result.error.message };
+					if (result.success) {
+						lastResult = { success: true, message: 'success!' };
+					} else {
+						lastResult = { success: false, message: result.error.message };
+					}
+				} catch (error) {
+					lastResult = { success: false, message: (error as Error).message };
 				}
 			}}
 		>
