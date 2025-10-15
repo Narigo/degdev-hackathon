@@ -9,6 +9,9 @@
 	let { asset, game }: Props = $props();
 
 	function srcToPath(path: string): string {
+		if (path.match(/^https?:\/\//)) {
+			return path;
+		}
 		return assetPath(`/games/${game.id}${path}`);
 	}
 </script>
